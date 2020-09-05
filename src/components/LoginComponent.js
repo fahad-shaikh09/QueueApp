@@ -31,7 +31,9 @@ const dispatch = useDispatch();
             console.log("User: ", user)
             // setRenderHome(true)
             props.setIsLoggedIn(true)
-            dispatch({type: "LOGIN_USER"})
+            dispatch({type: "LOGIN_USER",
+                      payload: user.displayName  
+                        })
             // ...
         })
             .catch(function (error) {

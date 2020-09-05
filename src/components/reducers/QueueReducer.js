@@ -8,6 +8,7 @@ export default function QueueReducer(state = initialState, action) {
         case "LOGIN_USER":
             return {...state,
                 isLoggedIn: true,
+                user: action.payload
             };
         default:
             return state;
