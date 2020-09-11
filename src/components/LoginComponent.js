@@ -5,8 +5,7 @@ import { useDispatch } from "react-redux"
 
 
 const LoginComponent = (props) => {
-const dispatch = useDispatch();
-//    const [renderHome,setRenderHome] = useState(false)
+    const dispatch = useDispatch();
 
     const firebaseConfig = {
         apiKey: "AIzaSyDVsZ4JVP731j3eA5ncLWIViuKjcsen7Qo",
@@ -17,7 +16,10 @@ const dispatch = useDispatch();
         messagingSenderId: "925063065312",
         appId: "1:925063065312:web:27110ae2cd55409a366a85"
     };
-    firebase.initializeApp(firebaseConfig);
+    // firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+     }
 
     var provider = new firebase.auth.FacebookAuthProvider();
 
@@ -29,11 +31,11 @@ const dispatch = useDispatch();
             var user = result.user;
             console.log("Token: ", token)
             console.log("User: ", user)
-            // setRenderHome(true)
-            props.setIsLoggedIn(true)
-            dispatch({type: "LOGIN_USER",
-                      payload: user.displayName  
-                        })
+            // props.setIsLoggedIn(true)
+            dispatch({
+                type: "LOGIN_USER",
+                payload: user.displayName
+            })
             // ...
         })
             .catch(function (error) {
@@ -52,7 +54,7 @@ const dispatch = useDispatch();
             })
     };
 
-    
+
 
     return (
         <div>
