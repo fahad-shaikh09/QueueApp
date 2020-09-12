@@ -1,14 +1,33 @@
 const initialState = {
     user: "",
-    isLoggedIn: false
+    isLoggedIn: false,
+
+    name: "",
+    date: "",
+    certificates: "",
+    timingsFrom: "",
+    timingsTo: "",
+    address: "",
+
 }
 
 export default function QueueReducer(state = initialState, action) {
     switch (action.type) {
         case "LOGIN_USER":
-            return {...state,
+            return {
+                ...state,
                 isLoggedIn: true,
                 user: action.payload
+            };
+        case "SET_COMPANY":
+            return {
+                ...state,
+                name: action.payload.name,
+                date: action.payload.date,
+                certificates: action.payload.certificates,
+                timingsFrom: action.payload.timingsFrom,
+                timingsTo: action.payload.timingsTo,
+                address: action.payload.address,
             };
         default:
             return state;

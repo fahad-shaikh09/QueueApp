@@ -17,8 +17,8 @@ const RouterComp = () => {
   // console.log("props in router", props)
   const isLoggedIn = useSelector(state => state.isLoggedIn)
   // const isLoggedIn = props.isLoggedIn;
-  console.log("isLoggedIn in Router comp:", isLoggedIn)
-  console.log('window.location.pathname***', window.location.pathname)
+  // console.log("isLoggedIn in Router comp:", isLoggedIn)
+  // console.log('window.location.pathname***', window.location.pathname)
   const currentPath = window.location.pathname.length === 1 ? 'home' : window.location.pathname
 
   return (

@@ -30,7 +30,7 @@ const LoginComponent = (props) => {
             // The signed-in user info.
             var user = result.user;
             console.log("Token: ", token)
-            console.log("User: ", user)
+            // console.log("User: ", user)
             // props.setIsLoggedIn(true)
             dispatch({
                 type: "LOGIN_USER",
@@ -61,7 +61,6 @@ const LoginComponent = (props) => {
             <h1>Login</h1>
             <button onClick={() => loginFunc()}>Login with Facebook</button>
             <br />
-
             {/* {renderHome && <Home />} */}
         </div>
     )
