@@ -1,13 +1,14 @@
 const initialState = {
     user: "",
     isLoggedIn: false,
-
-    name: "",
-    date: "",
-    certificates: "",
-    timingsFrom: "",
-    timingsTo: "",
-    address: "",
+    companies:[]
+    // {name: "",
+    // date: "",
+    // certificates: "",
+    // timingsFrom: "",
+    // timingsTo: "",
+    // address: "",
+    // },
 
 }
 
@@ -22,12 +23,13 @@ export default function QueueReducer(state = initialState, action) {
         case "SET_COMPANY":
             return {
                 ...state,
-                name: action.payload.name,
-                date: action.payload.date,
-                certificates: action.payload.certificates,
-                timingsFrom: action.payload.timingsFrom,
-                timingsTo: action.payload.timingsTo,
-                address: action.payload.address,
+                companies: [action.payload]
+                // name: action.payload.name,
+                // date: action.payload.date,
+                // certificates: action.payload.certificates,
+                // timingsFrom: action.payload.timingsFrom,
+                // timingsTo: action.payload.timingsTo,
+                // address: action.payload.address,
             };
         default:
             return state;
