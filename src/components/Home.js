@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from "react-redux"
 import * as firebase from "firebase"
 import Form from "./../components/Form"
-
+import MyMapComponent from "./../components/Map/index"
 
 const Home = () => {
 
@@ -77,6 +77,15 @@ const Home = () => {
         </tbody>
 
       </table>
+
+
+      <MyMapComponent
+  isMarkerShown
+  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+  loadingElement={<div style={{ height: `100%` }} />}
+  containerElement={<div style={{ height: `400px` }} />}
+  mapElement={<div style={{ height: `100%` }} />}
+/>
 
     </div>
   )

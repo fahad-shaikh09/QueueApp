@@ -24,7 +24,7 @@ const Form = (props) => {
         props.setShowForm(false)
 
         dispatch({
-            type: "SET_COMPANY",
+            type: "ADD_COMPANY",
             payload: {
                 name: name,
                 date: date,

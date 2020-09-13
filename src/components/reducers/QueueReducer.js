@@ -20,7 +20,7 @@ export default function QueueReducer(state = initialState, action) {
                 isLoggedIn: true,
                 user: action.payload
             };
-        case "SET_COMPANY":
+        case "ADD_COMPANY":
             return {
                 ...state,
                 companies: [action.payload]
