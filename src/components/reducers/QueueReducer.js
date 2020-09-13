@@ -23,7 +23,7 @@ export default function QueueReducer(state = initialState, action) {
         case "ADD_COMPANY":
             return {
                 ...state,
-                companies: [action.payload]
+                companies: [...state.companies, action.payload]
                 // name: action.payload.name,
                 // date: action.payload.date,
                 // certificates: action.payload.certificates,

@@ -45,14 +45,14 @@ const Home = () => {
 
 
       <table border='1' style={{
-            textAlign: 'left',
-            width: "50vw",
-            alignItems: "center",
-            margin: "0 auto",
-        }}>
+        textAlign: 'left',
+        width: "50vw",
+        alignItems: "center",
+        margin: "0 auto",
+      }}>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Company's Name</th>
             <th>Date</th>
             <th>Certificates</th>
             <th>Timings (From)</th>
@@ -75,17 +75,17 @@ const Home = () => {
             )
           })}
         </tbody>
-
       </table>
+      <br></br><br></br>
 
 
       <MyMapComponent
-  isMarkerShown
-  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-  loadingElement={<div style={{ height: `100%` }} />}
-  containerElement={<div style={{ height: `400px` }} />}
-  mapElement={<div style={{ height: `100%` }} />}
-/>
+        isMarkerShown
+        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `400px` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
 
     </div>
   )
