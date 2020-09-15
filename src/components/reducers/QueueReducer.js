@@ -1,14 +1,10 @@
 const initialState = {
     user: "",
     isLoggedIn: false,
-    companies:[]
-    // {name: "",
-    // date: "",
-    // certificates: "",
-    // timingsFrom: "",
-    // timingsTo: "",
-    // address: "",
-    // },
+    companies:[],
+    tokensCount:0,
+    estimatedTime:0,
+    index:"",
 
 }
 
@@ -31,6 +27,13 @@ export default function QueueReducer(state = initialState, action) {
                 // timingsTo: action.payload.timingsTo,
                 // address: action.payload.address,
             };
+        case "SHOW_COMPANY":
+            return{
+                ...state,
+                tokensCount: action.payload.tokensCount,
+                estimatedTime: action.payload.estimatedTime,
+                index:action.payload.index,
+            }    
         default:
             return state;
     }

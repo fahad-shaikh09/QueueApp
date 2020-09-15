@@ -13,14 +13,6 @@ const Form = (props) => {
 
     const formSubmit = event => {
         event.preventDefault();
-
-        // console.log("name", name)
-        // console.log("date", date)
-        // console.log("certificates", certificates)
-        // console.log("timingsFrom", timingsFrom)
-        // console.log("timingsTo", timingsTo)
-        // console.log("address", address)
-
         props.setShowForm(false)
 
         dispatch({

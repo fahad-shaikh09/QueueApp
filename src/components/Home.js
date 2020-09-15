@@ -4,15 +4,17 @@ import * as firebase from "firebase"
 import Form from "./../components/Form"
 import MyMapComponent from "./../components/Map/index"
 import ShowSingleComp from "./ShowSingleComp"
+import BookToken from "./BookToken"
 
 const Home = () => {
 
   const currentUser = useSelector(state => state.user)
   const [showform, setShowForm] = useState(false)
   const [showSingleCompany, setShowSingleCompany] = useState(false);
+  const [showBookToken, setShowBookToken] = useState(false)
 
   const companiesInStore = useSelector(state => state.companies)
-  const [index,setIndex] = useState()
+  const [index, setIndex] = useState()
   // console.log("companiesInStore: ", companiesInStore)
 
   // const companyName = useSelector(state => state.companies.name)
@@ -29,12 +31,22 @@ const Home = () => {
   // console.log("companyTimingsTo from redux Store:", companyTimingsTo)
   // console.log("companyAddress from redux Store:", companyAddress)
 
-const displayCompany = (index) => {
-  setShowForm(false)
-  setShowSingleCompany(true)
-  setIndex(index)
-}
- 
+  const displayCompany = (index) => {
+    setShowForm(false)
+    setShowSingleCompany(true)
+    setIndex(index)
+  }
+  const ShowForm = () => {
+    setShowForm(true)
+  }
+
+  const bookToken = () => {
+    setShowForm(false)
+    setShowSingleCompany(false)
+    setShowBookToken(true)
+
+  }
+
   return (
     <div>
       <h1>You are Logged in as {currentUser}</h1>
@@ -42,12 +54,12 @@ const displayCompany = (index) => {
       <hr></hr>
       <br></br>
       <br></br>
+      {/* ///////////////////////////////////////////////////////////////////////////////////// */}
 
-
-      <button onClick={() => setShowForm(true)}>Are you a Company?</button> <br></br>
+      <button onClick={() => ShowForm()}>Are you a Company?</button> <br></br>
       <br></br>
 
-      <button>Are you a Person, waiting for Token?</button>
+      <button onClick={() => bookToken()}>Are you a Person, waiting for Token?</button>
       <br></br><br></br>
 
       {showform && <Form setShowForm={setShowForm} />}
@@ -67,7 +79,7 @@ const displayCompany = (index) => {
             <th>Timings (From)</th>
             <th>Timings (To)</th>
             <th>Address</th>
-            <th>See Details?</th>
+            <th>Add Tokens?</th>
           </tr>
         </thead>
 
@@ -81,15 +93,22 @@ const displayCompany = (index) => {
                 <td> {item.timingsFrom} </td>
                 <td> {item.timingsTo} </td>
                 <td> {item.address} </td>
-                <td> <button onClick={() => {displayCompany(index) }}>Click to see details</button> </td>
+                <td> <button onClick={() => { displayCompany(index) }}>Click here</button> </td>
               </tr>
             )
           })}
         </tbody>
       </table>
       <br></br><br></br>
-         {showSingleCompany && <ShowSingleComp index={index}/>} 
+      {showSingleCompany && <ShowSingleComp index={index} />}
 
+      {showBookToken && <BookToken index={index} />}
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <MyMapComponent
         isMarkerShown
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
