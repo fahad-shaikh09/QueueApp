@@ -5,6 +5,7 @@ import Form from "./../components/Form"
 import MyMapComponent from "./../components/Map/index"
 import ShowSingleComp from "./ShowSingleComp"
 import BookToken from "./BookToken"
+import ShowAllCompanies from "./ShowAllCompanies"
 
 const Home = () => {
 
@@ -12,8 +13,9 @@ const Home = () => {
   const [showform, setShowForm] = useState(false)
   const [showSingleCompany, setShowSingleCompany] = useState(false);
   const [showBookToken, setShowBookToken] = useState(false)
+  const [showAllCompanies,setShowAllCompanies] = useState(false)
 
-  const companiesInStore = useSelector(state => state.companies)
+  // const companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
   // console.log("companiesInStore: ", companiesInStore)
 
@@ -31,11 +33,7 @@ const Home = () => {
   // console.log("companyTimingsTo from redux Store:", companyTimingsTo)
   // console.log("companyAddress from redux Store:", companyAddress)
 
-  const displayCompany = (index) => {
-    setShowForm(false)
-    setShowSingleCompany(true)
-    setIndex(index)
-  }
+  
   const ShowForm = () => {
     setShowForm(true)
   }
@@ -45,6 +43,10 @@ const Home = () => {
     setShowSingleCompany(false)
     setShowBookToken(true)
 
+  }
+
+  const displayCompanies = () => {
+    setShowAllCompanies(true)
   }
 
   return (
@@ -62,53 +64,22 @@ const Home = () => {
       <button onClick={() => bookToken()}>Are you a Person, waiting for Token?</button>
       <br></br><br></br>
 
+      <button onClick={() => displayCompanies()}>Do you want to see List of Companies?</button>
+      <br></br><br></br>
+      {showAllCompanies && <ShowAllCompanies setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex}/>}
+
       {showform && <Form setShowForm={setShowForm} />}
 
 
-      <table border='1' style={{
-        textAlign: 'left',
-        width: "50vw",
-        alignItems: "center",
-        margin: "0 auto",
-      }}>
-        <thead>
-          <tr>
-            <th>Company's Name</th>
-            <th>Date</th>
-            <th>Certificates</th>
-            <th>Timings (From)</th>
-            <th>Timings (To)</th>
-            <th>Address</th>
-            <th>Add Tokens?</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {companiesInStore.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{item.name} </td>
-                <td> {item.date}</td>
-                <td> {item.certificates} </td>
-                <td> {item.timingsFrom} </td>
-                <td> {item.timingsTo} </td>
-                <td> {item.address} </td>
-                <td> <button onClick={() => { displayCompany(index) }}>Click here</button> </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
       <br></br><br></br>
       {showSingleCompany && <ShowSingleComp index={index} />}
 
       {showBookToken && <BookToken index={index} />}
 
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
+
+
+
+      <br></br>      <br></br>      <br></br>      <br></br>      <br></br>
       <MyMapComponent
         isMarkerShown
         googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
