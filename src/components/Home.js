@@ -3,29 +3,38 @@ import { useSelector } from "react-redux"
 import * as firebase from "firebase"
 import Form from "./../components/Form"
 import MyMapComponent from "./../components/Map/index"
+import ShowSingleComp from "./ShowSingleComp"
 
 const Home = () => {
 
   const currentUser = useSelector(state => state.user)
   const [showform, setShowForm] = useState(false)
+  const [showSingleCompany, setShowSingleCompany] = useState(false);
 
   const companiesInStore = useSelector(state => state.companies)
-  console.log("companiesInStore: ", companiesInStore)
+  const [index,setIndex] = useState()
+  // console.log("companiesInStore: ", companiesInStore)
 
-  const companyName = useSelector(state => state.companies.name)
-  const companyDate = useSelector(state => state.companies.date)
-  const companyCertificates = useSelector(state => state.companies.certificates)
-  const companyTimingsFrom = useSelector(state => state.companies.timingsFrom)
-  const companyTimingsTo = useSelector(state => state.companies.timingsTo)
-  const companyAddress = useSelector(state => state.companies.address)
+  // const companyName = useSelector(state => state.companies.name)
+  // const companyDate = useSelector(state => state.companies.date)
+  // const companyCertificates = useSelector(state => state.companies.certificates)
+  // const companyTimingsFrom = useSelector(state => state.companies.timingsFrom)
+  // const companyTimingsTo = useSelector(state => state.companies.timingsTo)
+  // const companyAddress = useSelector(state => state.companies.address)
 
-  console.log("companyName from redux Store:", companyName)
-  console.log("companyDate from redux Store:", companyDate)
-  console.log("companyCertificates from redux Store:", companyCertificates)
-  console.log("companyTimingsFrom from redux Store:", companyTimingsFrom)
-  console.log("companyTimingsTo from redux Store:", companyTimingsTo)
-  console.log("companyAddress from redux Store:", companyAddress)
+  // console.log("companyName from redux Store:", companyName)
+  // console.log("companyDate from redux Store:", companyDate)
+  // console.log("companyCertificates from redux Store:", companyCertificates)
+  // console.log("companyTimingsFrom from redux Store:", companyTimingsFrom)
+  // console.log("companyTimingsTo from redux Store:", companyTimingsTo)
+  // console.log("companyAddress from redux Store:", companyAddress)
 
+const displayCompany = (index) => {
+  setShowForm(false)
+  setShowSingleCompany(true)
+  setIndex(index)
+}
+ 
   return (
     <div>
       <h1>You are Logged in as {currentUser}</h1>
@@ -58,6 +67,7 @@ const Home = () => {
             <th>Timings (From)</th>
             <th>Timings (To)</th>
             <th>Address</th>
+            <th>See Details?</th>
           </tr>
         </thead>
 
@@ -71,13 +81,14 @@ const Home = () => {
                 <td> {item.timingsFrom} </td>
                 <td> {item.timingsTo} </td>
                 <td> {item.address} </td>
+                <td> <button onClick={() => {displayCompany(index) }}>Click to see details</button> </td>
               </tr>
             )
           })}
         </tbody>
       </table>
       <br></br><br></br>
-
+         {showSingleCompany && <ShowSingleComp index={index}/>} 
 
       <MyMapComponent
         isMarkerShown

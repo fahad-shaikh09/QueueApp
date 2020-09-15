@@ -13,8 +13,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
 
   
 
-  console.log("Latitude", latitude)
-  console.log("Longitude", longitude)
+  // console.log("Latitude", latitude)
+  // console.log("Longitude", longitude)
 
   return (
 
