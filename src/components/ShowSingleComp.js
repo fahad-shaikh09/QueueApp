@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const ShowSingleComp = (props) => {
-    let {index} = props  //destructuring
+    let { index } = props  //destructuring
     // console.log("index in ShowSingleComp Comp:", index)
-    
+
     const comp = useSelector(state => state.companies[index])
     // console.log("comp:", comp)
-    
+
     const [tokensCount, setTokensCount] = useState()
-    const [estimatedTime,setEstimatedTime] = useState()
+    const [estimatedTime, setEstimatedTime] = useState()
 
     const dispatch = useDispatch();
 
@@ -20,11 +20,13 @@ const ShowSingleComp = (props) => {
         dispatch({
             type: "SHOW_COMPANY",
             payload: {
-                tokensCount:tokensCount,
-                estimatedTime:estimatedTime,
-                index:index,
+                tokensCount: tokensCount,
+                estimatedTime: estimatedTime,
+                index: index,
             }
         })
+        props.setShowSingleCompany(false)
+
     }
 
     return (
@@ -33,7 +35,7 @@ const ShowSingleComp = (props) => {
             <h3>Total Tokens available for Today: {tokensCount} Tokens</h3>
             <h3>Estimated Time for each turn: {estimatedTime} mins</h3>
 
-            <form onSubmit={(event) => formSubmit(event)}> 
+            <form onSubmit={(event) => formSubmit(event)}>
 
                 Enter # of tokens for today:
                 <input type="number" name="tokens" onChange={(e) => setTokensCount(e.target.value)} />
@@ -43,7 +45,7 @@ const ShowSingleComp = (props) => {
                 <input type="number" name="estimatedTime" onChange={(e) => setEstimatedTime(e.target.value)} />
                 <br></br>
                 <br></br>
-                
+
                 <input type="submit" value="Update Details" />
                 <br></br>
             </form>

@@ -13,6 +13,7 @@ const Form = (props) => {
 
     const formSubmit = event => {
         event.preventDefault();
+        alert("Company has been added!")
         props.setShowForm(false)
 
         dispatch({

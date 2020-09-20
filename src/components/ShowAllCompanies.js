@@ -4,11 +4,12 @@ import { useSelector } from "react-redux"
 const ShowAllCompanies = (props) => {
 
   const companiesInStore = useSelector(state => state.companies)
-  
+
   const displayCompany = (index) => {
     props.setShowForm(false)
     props.setShowSingleCompany(true)
     props.setIndex(index)
+    props.setShowAllCompanies(false)
   }
 
 
@@ -43,7 +44,7 @@ const ShowAllCompanies = (props) => {
                 <td> {item.timingsFrom} </td>
                 <td> {item.timingsTo} </td>
                 <td> {item.address} </td>
-                <td> <button onClick={() => displayCompany(index) }>Click here</button> </td>
+                <td> <button onClick={() => displayCompany(index)}>Click here</button> </td>
               </tr>
             )
           })}

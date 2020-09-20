@@ -35,18 +35,18 @@ const Home = () => {
 
   
   const ShowForm = () => {
-    setShowForm(true)
+    setShowForm(!showform)
   }
 
   const bookToken = () => {
-    setShowForm(false)
-    setShowSingleCompany(false)
-    setShowBookToken(true)
+    setShowForm(showform)
+    setShowSingleCompany(showSingleCompany)
+    setShowBookToken(!showBookToken)
 
   }
 
   const displayCompanies = () => {
-    setShowAllCompanies(true)
+    setShowAllCompanies(!showAllCompanies)
   }
 
   return (
@@ -63,16 +63,18 @@ const Home = () => {
 
       <button onClick={() => bookToken()}>Are you a Person, waiting for Token?</button>
       <br></br><br></br>
+      <p>---------------------------------------------------------------------------</p>
 
+      
       <button onClick={() => displayCompanies()}>Do you want to see List of Companies?</button>
       <br></br><br></br>
-      {showAllCompanies && <ShowAllCompanies setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex}/>}
+      {showAllCompanies && <ShowAllCompanies setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies}/>}
 
       {showform && <Form setShowForm={setShowForm} />}
 
 
       <br></br><br></br>
-      {showSingleCompany && <ShowSingleComp index={index} />}
+      {showSingleCompany && <ShowSingleComp index={index} setShowSingleCompany={setShowSingleCompany} />}
 
       {showBookToken && <BookToken index={index} />}
 
