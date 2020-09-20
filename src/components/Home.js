@@ -19,20 +19,6 @@ const Home = () => {
   const [index, setIndex] = useState()
   // console.log("companiesInStore: ", companiesInStore)
 
-  // const companyName = useSelector(state => state.companies.name)
-  // const companyDate = useSelector(state => state.companies.date)
-  // const companyCertificates = useSelector(state => state.companies.certificates)
-  // const companyTimingsFrom = useSelector(state => state.companies.timingsFrom)
-  // const companyTimingsTo = useSelector(state => state.companies.timingsTo)
-  // const companyAddress = useSelector(state => state.companies.address)
-
-  // console.log("companyName from redux Store:", companyName)
-  // console.log("companyDate from redux Store:", companyDate)
-  // console.log("companyCertificates from redux Store:", companyCertificates)
-  // console.log("companyTimingsFrom from redux Store:", companyTimingsFrom)
-  // console.log("companyTimingsTo from redux Store:", companyTimingsTo)
-  // console.log("companyAddress from redux Store:", companyAddress)
-
   
   const ShowForm = () => {
     setShowForm(!showform)

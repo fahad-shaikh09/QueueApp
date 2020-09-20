@@ -24,7 +24,9 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
 
   return (
     <div>
-
+      <br></br>
+      <br></br>
+      <h1>Drag marker to select Places</h1>
       <select>
         {places.map((place, index) => {
           return <option key={index} value={place}>{place.venue.name}</option>

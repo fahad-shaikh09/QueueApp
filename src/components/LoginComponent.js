@@ -22,7 +22,7 @@ const LoginComponent = (props) => {
      }
 
     var provider = new firebase.auth.FacebookAuthProvider();
-    const db = firebase.firestore()
+    // const db = firebase.firestore()
 
     function loginFunc() {
         firebase.auth().signInWithPopup(provider).then(function (result) {
@@ -55,13 +55,13 @@ const LoginComponent = (props) => {
             })
     };
 
-    function getAllCompanies () {
-        return db.collection('companies').get()
-    }
+    // function getAllCompanies () {
+    //     return db.collection('companies').get()
+    // }
 
-    function getSpecificCompany (transactionId) {
-        return db.collection('companies').doc(transactionId).get()
-    }
+    // function getSpecificCompany (transactionId) {
+    //     return db.collection('companies').doc(transactionId).get()
+    // }
     
 
 

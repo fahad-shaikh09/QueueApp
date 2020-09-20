@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { firebase } from "./../components/LoginComponent"
 
 const Form = (props) => {
     const [name, setName] = useState()
@@ -10,6 +11,27 @@ const Form = (props) => {
     const [address, setAddress] = useState()
 
     const dispatch = useDispatch();
+    const db = firebase.firestore()
+
+    function postDataToFirebase() {
+        // Add a new document in collection "companies"
+        db.collection("companies").doc(name).set({
+            name: { name },
+            date: { date },
+            certificates: { certificates },
+            timingsFrom: { timingsFrom },
+            timingsTo: { timingsTo },
+            address: { address }
+        })
+            .then(function () {
+                console.log("Document successfully written!");
+            })
+            .catch(function (error) {
+                console.error("Error writing document: ", error);
+            });
+    }
+
+
 
     const formSubmit = event => {
         event.preventDefault();
@@ -27,6 +49,7 @@ const Form = (props) => {
                 address: address,
             }
         })
+        postDataToFirebase()
     }
 
 
@@ -38,25 +61,25 @@ const Form = (props) => {
             margin: "0 auto",
         }}>
             <form onSubmit={(event) => formSubmit(event)}>
-            Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} />
-            <br></br>  <br></br>
+                Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} />
+                <br></br>  <br></br>
 
             Date since company is established <input type="date" onChange={e => setDate(e.target.value)} />
-            <br></br>  <br></br>
+                <br></br>  <br></br>
 
             Certificates <input type="text" onChange={e => setCertificates(e.target.value)} />
-            <br></br>  <br></br>
+                <br></br>  <br></br>
 
             Timings (From) <input type="date" onChange={e => setTimingsFrom(e.target.value)} />
-            <br></br>  <br></br>
+                <br></br>  <br></br>
 
             Timings (To) <input type="date" onChange={e => setTimingsTo(e.target.value)} />
-            <br></br>  <br></br>
+                <br></br>  <br></br>
 
             Address <input type="text" onChange={e => setAddress(e.target.value)} />
-            <br></br>  <br></br>
+                <br></br>  <br></br>
 
-            <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" />
                 <br></br>  <br></br>
 
             </form>
