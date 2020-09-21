@@ -1,11 +1,16 @@
-import React from 'react'
-import { useSelector } from "react-redux"
+import React, { useState } from 'react'
+// import { useSelector } from "react-redux"
+import { firebase } from "./../components/LoginComponent"
+
+
 
 const ShowAllCompanies = (props) => {
 
-  const companiesInStore = useSelector(state => state.companies)
+  // const companiesInStore = useSelector(state => state.companies)  //from Redux
 
-  const displayCompany = (index) => {
+  const [companiesInStore,setCompaniesInStore] = useState([])
+
+  const addToken = (index) => {
     props.setShowForm(false)
     props.setShowSingleCompany(true)
     props.setIndex(index)
@@ -13,6 +18,25 @@ const ShowAllCompanies = (props) => {
   }
 
 
+
+  /////////// GETTING COMPANIES FROM FIREBASE ///////////////
+  const db = firebase.firestore()
+
+  db.collection("companies")
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            setCompaniesInStore([doc.data()])
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+
+  //////////////////////////////////////////////////////
+// console.log("companiesInStore:", companiesInStore)
 
   return (
     <div>
@@ -38,13 +62,13 @@ const ShowAllCompanies = (props) => {
           {companiesInStore.map((item, index) => {
             return (
               <tr key={index}>
-                <td>{item.name} </td>
-                <td> {item.date}</td>
-                <td> {item.certificates} </td>
-                <td> {item.timingsFrom} </td>
-                <td> {item.timingsTo} </td>
-                <td> {item.address} </td>
-                <td> <button onClick={() => displayCompany(index)}>Click here</button> </td>
+                <td>{item.name.name} </td>
+                <td> {item.date.date}</td>
+                <td> {item.certificates.certificates} </td>
+                <td> {item.timingsFrom.timingsFrom} </td>
+                <td> {item.timingsTo.timingsTo} </td>
+                <td> {item.address.address} </td>
+                <td> <button onClick={() => addToken(index)}>Click here</button> </td>
               </tr>
             )
           })}

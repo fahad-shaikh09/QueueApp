@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => {
 

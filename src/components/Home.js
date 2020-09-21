@@ -32,7 +32,8 @@ const Home = () => {
   }
 
   const displayCompanies = () => {
-    setShowAllCompanies(!showAllCompanies)
+    setShowAllCompanies(!showAllCompanies)  
+
   }
 
   return (

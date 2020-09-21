@@ -5,20 +5,38 @@ import { firebase } from "./../components/LoginComponent"
 
 const ShowSingleComp = (props) => {
     let { index } = props  //destructuring
+    const [company,setCompany] = useState([])
 
-    const comp = useSelector(state => state.companies[index])
-    // console.log("comp:", comp)
+    // const comp = useSelector(state => state.companies[index])
 
-    const {name,date,certificates,timingsFrom,timingsTo,address} = comp
+/////////   Getting Single company from Firebase /////////////////////////////////////////
+const db = firebase.firestore()
+
+  db.collection("companies")
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // console.log(doc.id, " => ", doc.data());
+            setCompany([doc.data()])
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+
+
+    /////////////////////////////////////////////////////////////
+    console.log("company[index]:", company[index])
+
+    const {name:{name},date:{date},certificates:{certificates},timingsFrom:{timingsFrom},timingsTo:{timingsTo},address:{address}} = company
     const [tokensCount, setTokensCount] = useState()
     const [estimatedTime, setEstimatedTime] = useState()
 
     const dispatch = useDispatch();
-    const db = firebase.firestore()
 
 
 function postTokenToFirebase() {
-    db.collection("companies").doc(comp.name).set({
+    db.collection("companies").doc(company.name).set({
         name,date,certificates,timingsFrom,timingsTo,address,   //OLD DATA
         tokensCount: { tokensCount },  //adding Tokens
         estimatedTime: { estimatedTime },  //adding estimated time for this particular comp
@@ -47,7 +65,7 @@ const formSubmit = (event) => {    //ON FORM SUBMIT
 }
 return (
     <div>
-        <h1>Company: {comp.name}</h1>
+        <h1>Company: {company.name}</h1>
         <h3>Total Tokens available for Today: {tokensCount} Tokens</h3>
         <h3>Estimated Time for each turn: {estimatedTime} mins</h3>
 
