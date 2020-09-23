@@ -29,6 +29,7 @@ const Form = (props) => {
             .catch(function (error) {
                 console.error("Error writing document: ", error);
             });
+        props.addingNewComp(true)    
     }
 
 

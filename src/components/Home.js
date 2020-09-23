@@ -14,6 +14,7 @@ const Home = () => {
   const [showSingleCompany, setShowSingleCompany] = useState(false);
   const [showBookToken, setShowBookToken] = useState(false)
   const [showAllCompanies,setShowAllCompanies] = useState(false)
+const [addNewComp,setAddNewComp] = useState(false)
 
   // const companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
@@ -36,6 +37,10 @@ const Home = () => {
 
   }
 
+  const addingNewComp = () => {
+    setAddNewComp(!addNewComp)
+  }
+
   return (
     <div>
       <h1>You are Logged in as {currentUser}</h1>
@@ -45,7 +50,7 @@ const Home = () => {
       <br></br>
       {/* ///////////////////////////////////////////////////////////////////////////////////// */}
 
-      <button onClick={() => ShowForm()}>Are you a Company?</button> <br></br>
+      <button onClick={() => ShowForm()}>Do you want to Add a Company?</button> <br></br>
       <br></br>
 
       <button onClick={() => bookToken()}>Are you a Person, waiting for Token?</button>
@@ -55,9 +60,9 @@ const Home = () => {
       
       <button onClick={() => displayCompanies()}>Do you want to see List of Companies?</button>
       <br></br><br></br>
-      {showAllCompanies && <ShowAllCompanies setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies}/>}
+      {showAllCompanies && <ShowAllCompanies addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies}/>}
 
-      {showform && <Form setShowForm={setShowForm} />}
+      {showform && <Form setShowForm={setShowForm} addingNewComp={addingNewComp}/>}
 
 
       <br></br><br></br>

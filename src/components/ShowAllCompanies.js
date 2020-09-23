@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
-// import { useSelector } from "react-redux"
+import React, {  useEffect } from 'react'
+import { useSelector, useDispatch } from "react-redux"
 import { firebase } from "./../components/LoginComponent"
 
 
 
 const ShowAllCompanies = (props) => {
 
-  // const companiesInStore = useSelector(state => state.companies)  //from Redux
+  const dispatch = useDispatch();
 
-  const [companiesInStore,setCompaniesInStore] = useState([])
+  const companiesInStore = useSelector(state => state.companies)  //from Redux
+  // const addingNewComp = props.addingNewComp;
+  
+  // const [companiesInStore, setCompaniesInStore] = useState([])
 
   const addToken = (index) => {
     props.setShowForm(false)
@@ -20,23 +23,40 @@ const ShowAllCompanies = (props) => {
 
 
   /////////// GETTING COMPANIES FROM FIREBASE ///////////////
-  const db = firebase.firestore()
 
-  db.collection("companies")
-    .get()
-    .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());
-            setCompaniesInStore([doc.data()])
+  useEffect(()=> getDataFromFirebase(),[])  // to get 1st company
+  // useEffect(()=> getDataFromFirebase(),[addingNewComp])  //to get newly added company
+
+  
+
+  function getDataFromFirebase() {
+    const db = firebase.firestore()
+
+    db.collection("companies")
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, " => ", doc.data());
+          let obj = doc.data();
+          console.log("obj: ", obj)
+
+          dispatch({
+            type: "SET_COMPANIES_IN_STORE",
+            payload: obj,
+          })
+
+
+          // console.log("companiesInStore:", companiesInStore)
         });
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
+      })
 
+      .catch(function (error) {
+        console.log("Error getting documents: ", error);
+      });
+  }
   //////////////////////////////////////////////////////
-// console.log("companiesInStore:", companiesInStore)
 
   return (
     <div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import { firebase } from "./../components/LoginComponent"
 
 
 const ShowSingleComp = (props) => {
     let { index } = props  //destructuring
     const [company,setCompany] = useState([])
-
+console.log("index:",index)
     // const comp = useSelector(state => state.companies[index])
 
 /////////   Getting Single company from Firebase /////////////////////////////////////////
