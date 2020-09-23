@@ -65,19 +65,19 @@ const Form = (props) => {
                 Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} />
                 <br></br>  <br></br>
 
-            Date since company is established <input type="date" onChange={e => setDate(e.target.value)} />
+            Date since company is established <input required type="date" onChange={e => setDate(e.target.value)} />
                 <br></br>  <br></br>
 
-            Certificates <input type="text" onChange={e => setCertificates(e.target.value)} />
+            Certificates <input required type="text" onChange={e => setCertificates(e.target.value)} />
                 <br></br>  <br></br>
 
-            Timings (From) <input type="date" onChange={e => setTimingsFrom(e.target.value)} />
+            Timings (From) <input required type="date" onChange={e => setTimingsFrom(e.target.value)} />
                 <br></br>  <br></br>
 
-            Timings (To) <input type="date" onChange={e => setTimingsTo(e.target.value)} />
+            Timings (To) <input required type="date" onChange={e => setTimingsTo(e.target.value)} />
                 <br></br>  <br></br>
 
-            Address <input type="text" onChange={e => setAddress(e.target.value)} />
+            Address <input required type="text" onChange={e => setAddress(e.target.value)} />
                 <br></br>  <br></br>
 
                 <input type="submit" value="Submit" />

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import * as firebase from "firebase"
 import Form from "./../components/Form"
 import MyMapComponent from "./../components/Map/index"
@@ -13,27 +13,32 @@ const Home = () => {
   const [showform, setShowForm] = useState(false)
   const [showSingleCompany, setShowSingleCompany] = useState(false);
   const [showBookToken, setShowBookToken] = useState(false)
-  const [showAllCompanies,setShowAllCompanies] = useState(false)
-const [addNewComp,setAddNewComp] = useState(false)
+  const [showAllCompanies, setShowAllCompanies] = useState(false)
+  const [addNewComp, setAddNewComp] = useState(false)
 
-  // const companiesInStore = useSelector(state => state.companies)
+  var companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
   // console.log("companiesInStore: ", companiesInStore)
 
-  
+
   const ShowForm = () => {
     setShowForm(!showform)
   }
 
+  const dispatch = useDispatch();
+  
   const bookToken = () => {
     setShowForm(showform)
     setShowSingleCompany(showSingleCompany)
     setShowBookToken(!showBookToken)
-
   }
-
+  
   const displayCompanies = () => {
-    setShowAllCompanies(!showAllCompanies)  
+    // companiesInStore = []
+    dispatch({
+      type: "EMPTY_COMPANIES_IN_STORE"
+    })
+    setShowAllCompanies(!showAllCompanies)
 
   }
 
@@ -57,12 +62,12 @@ const [addNewComp,setAddNewComp] = useState(false)
       <br></br><br></br>
       <p>---------------------------------------------------------------------------</p>
 
-      
+
       <button onClick={() => displayCompanies()}>Do you want to see List of Companies?</button>
       <br></br><br></br>
-      {showAllCompanies && <ShowAllCompanies addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies}/>}
+      {showAllCompanies && <ShowAllCompanies addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies} />}
 
-      {showform && <Form setShowForm={setShowForm} addingNewComp={addingNewComp}/>}
+      {showform && <Form setShowForm={setShowForm} addingNewComp={addingNewComp} />}
 
 
       <br></br><br></br>

@@ -38,10 +38,11 @@ const ShowAllCompanies = (props) => {
         querySnapshot.forEach(function (doc) {
 
           // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
+          // console.log(doc.id, " => ", doc.data());
           let obj = doc.data();
           console.log("obj: ", obj)
 
+         
           dispatch({
             type: "SET_COMPANIES_IN_STORE",
             payload: obj,
@@ -57,7 +58,7 @@ const ShowAllCompanies = (props) => {
       });
   }
   //////////////////////////////////////////////////////
-
+if(companiesInStore){
   return (
     <div>
       <table border='1' style={{
@@ -79,7 +80,9 @@ const ShowAllCompanies = (props) => {
         </thead>
 
         <tbody>
+          {console.log("companiesInStore:",companiesInStore)}
           {companiesInStore.map((item, index) => {
+            console.log("item:", item)
             return (
               <tr key={index}>
                 <td>{item.name.name} </td>
@@ -95,7 +98,7 @@ const ShowAllCompanies = (props) => {
         </tbody>
       </table>
     </div>
-  )
+  )}
 }
 
 export default ShowAllCompanies

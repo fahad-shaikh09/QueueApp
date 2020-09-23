@@ -31,13 +31,12 @@ export default function QueueReducer(state = initialState, action) {
             return {
                 ...state,
                 companies: [...state.companies, action.payload]
-                // name: action.payload.name,
-                // date: action.payload.date,
-                // certificates: action.payload.certificates,
-                // timingsFrom: action.payload.timingsFrom,
-                // timingsTo: action.payload.timingsTo,
-                // address: action.payload.address,
             };
+            case "EMPTY_COMPANIES_IN_STORE":
+                return {
+                    ...state,
+                    companies: []
+                };
         case "SHOW_COMPANY":
             return{
                 ...state,
