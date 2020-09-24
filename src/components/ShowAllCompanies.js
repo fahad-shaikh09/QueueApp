@@ -53,7 +53,7 @@ if(companiesInStore){
     <div>
       <table border='1' style={{
         textAlign: 'left',
-        width: "50vw",
+        width: "80vw",
         alignItems: "center",
         margin: "0 auto",
       }}>
@@ -65,6 +65,8 @@ if(companiesInStore){
             <th>Timings (From)</th>
             <th>Timings (To)</th>
             <th>Address</th>
+            <th>Tokens</th>
+            <th>Expected Time </th>
             <th>Add Tokens?</th>
           </tr>
         </thead>
@@ -79,6 +81,8 @@ if(companiesInStore){
                 <td> {item.timingsFrom.timingsFrom} </td>
                 <td> {item.timingsTo.timingsTo} </td>
                 <td> {item.address.address} </td>
+                <td> {item.tokensCount.tokensCount} </td>      
+                <td> {item.estimatedTime.estimatedTime} </td>
                 <td> <button onClick={() => addToken(index)}>Click here</button> </td>
               </tr>
             )
@@ -90,3 +94,7 @@ if(companiesInStore){
 }
 
 export default ShowAllCompanies
+
+
+// item.tokensCount.tokensCount
+//item.estimatedTime.estimatedTime

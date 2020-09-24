@@ -74,7 +74,7 @@ const ShowSingleComp = (props) => {
         //         index: index,
         //     }
         // })
-        // props.setShowSingleCompany(false)
+        props.setShowSingleCompany(false)
     }
 
     return (

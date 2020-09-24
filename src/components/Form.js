@@ -9,6 +9,9 @@ const Form = (props) => {
     const [timingsFrom, setTimingsFrom] = useState()
     const [timingsTo, setTimingsTo] = useState()
     const [address, setAddress] = useState()
+    let tokensCount = 0;
+    let estimatedTime =  0;
+
 
     const dispatch = useDispatch();
     const db = firebase.firestore()
@@ -21,7 +24,9 @@ const Form = (props) => {
             certificates: { certificates },
             timingsFrom: { timingsFrom },
             timingsTo: { timingsTo },
-            address: { address }
+            address: { address },
+            tokensCount: {tokensCount},
+            estimatedTime: {estimatedTime}
         })
             .then(function () {
                 console.log("Document successfully written!");
@@ -48,6 +53,8 @@ const Form = (props) => {
                 timingsFrom: timingsFrom,
                 timingsTo: timingsTo,
                 address: address,
+                tokensCount: 0,
+                estimatedTime: 0,
             }
         })
         postDataToFirebase()
