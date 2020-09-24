@@ -16,7 +16,7 @@ const Home = () => {
   const [showAllCompanies, setShowAllCompanies] = useState(false)
   const [addNewComp, setAddNewComp] = useState(false)
 
-  var companiesInStore = useSelector(state => state.companies)
+  // var companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
   // console.log("companiesInStore: ", companiesInStore)
 

@@ -9,7 +9,6 @@ const ShowAllCompanies = (props) => {
   const dispatch = useDispatch();
 
   const companiesInStore = useSelector(state => state.companies)  //from Redux
-  // const addingNewComp = props.addingNewComp;
   
   // const [companiesInStore, setCompaniesInStore] = useState([])
 
@@ -25,9 +24,6 @@ const ShowAllCompanies = (props) => {
   /////////// GETTING COMPANIES FROM FIREBASE ///////////////
 
   useEffect(()=> getDataFromFirebase(),[])  // to get 1st company
-  // useEffect(()=> getDataFromFirebase(),[addingNewComp])  //to get newly added company
-
-  
 
   function getDataFromFirebase() {
     const db = firebase.firestore()
@@ -37,19 +33,13 @@ const ShowAllCompanies = (props) => {
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
 
-          // doc.data() is never undefined for query doc snapshots
           // console.log(doc.id, " => ", doc.data());
           let obj = doc.data();
-          console.log("obj: ", obj)
-
          
           dispatch({
             type: "SET_COMPANIES_IN_STORE",
             payload: obj,
           })
-
-
-          // console.log("companiesInStore:", companiesInStore)
         });
       })
 
@@ -80,9 +70,7 @@ if(companiesInStore){
         </thead>
 
         <tbody>
-          {console.log("companiesInStore:",companiesInStore)}
           {companiesInStore.map((item, index) => {
-            console.log("item:", item)
             return (
               <tr key={index}>
                 <td>{item.name.name} </td>
