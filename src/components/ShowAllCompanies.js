@@ -9,7 +9,7 @@ const ShowAllCompanies = (props) => {
   const dispatch = useDispatch();
 
   const companiesInStore = useSelector(state => state.companies)  //from Redux
-  
+  // console.log("companies in Show All companies Comp:", companiesInStore)
   // const [companiesInStore, setCompaniesInStore] = useState([])
 
   const addToken = (index) => {
@@ -42,13 +42,21 @@ const ShowAllCompanies = (props) => {
           })
         });
       })
-
+      
       .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
-  }
-  //////////////////////////////////////////////////////
-if(companiesInStore){
+    }
+    
+    
+    function sendCompaniesToHome(companiesInStore){
+      props.getCompFromShow(companiesInStore)
+      
+    }
+    
+    //////////////////////////////////////////////////////
+    if(companiesInStore){
+      sendCompaniesToHome(companiesInStore)
   return (
     <div>
       <table border='1' style={{

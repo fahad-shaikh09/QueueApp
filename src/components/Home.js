@@ -16,6 +16,14 @@ const Home = () => {
   const [showAllCompanies, setShowAllCompanies] = useState(false)
   const [addNewComp, setAddNewComp] = useState(false)
 
+  const [companies,setCompanies] = useState()
+
+  function getCompFromShow(companies){
+    setCompanies(companies)
+  }
+
+console.log("companies in Home", companies)
+
   // var companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
   // console.log("companiesInStore: ", companiesInStore)
@@ -65,15 +73,22 @@ const Home = () => {
 
       <button onClick={() => displayCompanies()}>Do you want to see List of Companies?</button>
       <br></br><br></br>
-      {showAllCompanies && <ShowAllCompanies addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies} />}
 
+      {/* TO RENDER ALL COMPANIES  */}
+      {showAllCompanies && <ShowAllCompanies getCompFromShow={getCompFromShow} addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies} />}
+
+
+      {/* TO ADD NEW COMPANY  */}
       {showform && <Form setShowForm={setShowForm} addingNewComp={addingNewComp} />}
 
 
-      <br></br><br></br>
+      <br></br><br></br> 
+      {/* TO GIVE ADD TOKEN OPTION  */}
       {showSingleCompany && <ShowSingleComp index={index} setShowSingleCompany={setShowSingleCompany} />}
 
-      {showBookToken && <BookToken index={index} />}
+
+      {/* TO BOOK TOKEN OF ANY COMPANY  */}
+      {showBookToken && <BookToken index={index} companies={companies} />}
 
 
 

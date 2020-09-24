@@ -1,17 +1,59 @@
-import React from 'react'
-import { useSelector } from "react-redux"
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+// import { firebase } from "./../components/LoginComponent"
 
 
 
 const BookToken = (props) => {
-    const companies = useSelector(state => state.companies)
-    const { index } = props // destructuring
-    // console.log("Companies from Store in BookToken", companies)
-    console.log("Index from Store in BookToken", index)
+    // const { index } = props // destructuring
 
-    const bookToken = () => {
+    // const dispatch = useDispatch();
+    console.log("props in BookToken:", props)
+    
+    let receivedCompanies = props.companies;
+
+    // let reveivedCompanies = props.getCompFromShow()
+
+//     const [companies,setCompanies] = useState([])
+//     let newList = useSelector(state => state.companies)
+//     if(newList != ""){
+//     setCompanies([newList])
+// }
+
+    console.log("companies in Book Token:", receivedCompanies)
+
+    /////////// GETTING COMPANIES FROM FIREBASE ///////////////
+
+// function getDataFromFirebase() {
+//   const db = firebase.firestore()
+
+//   db.collection("companies")
+//     .get()
+//     .then(function (querySnapshot) {
+//       querySnapshot.forEach(function (doc) {
+
+//         // console.log(doc.id, " => ", doc.data());
+//         let obj = doc.data();
+       
+//         dispatch({
+//           type: "SHOW_COMPANY",
+//           payload: obj,
+//         })
+//       });
+//     })
+
+//     .catch(function (error) {
+//       console.log("Error getting documents: ", error);
+//     });
+// }
+///////////////////////////////////////////////////////////////////////
+
+    const tokenBooked = () => {
         console.log("1 token will be booked")
     }
+    
+
+
     return (
         <div>
             <table border='1' style={{
@@ -35,18 +77,17 @@ const BookToken = (props) => {
                 </thead>
 
                 <tbody>
-                    {companies.map((item, index) => {
-                        console.log("companies array: ",companies)
+                    {receivedCompanies.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.name} </td>
-                                <td> {item.date}</td>
-                                <td> {item.certificates} </td>
-                                <td> {item.timingsFrom} </td>
-                                <td> {item.timingsTo} </td>
-                                <td> {item.address} </td>
+                                <td>{item.name.name} </td>
+                                <td> {item.date.date}</td>
+                                <td> {item.certificates.certificates} </td>
+                                <td> {item.timingsFrom.timingsFrom} </td>
+                                <td> {item.timingsTo.timingsTo} </td>
+                                <td> {item.address.address} </td>
                                 <td> {20} </td>
-                                <td> <button style={{color:"white",backgroundColor:"green"}} onClick={() => bookToken()}>Yes!</button> </td>
+                                <td> <button style={{color:"white",backgroundColor:"green"}} onClick={() => tokenBooked()}>Yes!</button> </td>
                             </tr>
                         )
                     })}
