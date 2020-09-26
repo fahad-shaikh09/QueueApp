@@ -9,7 +9,7 @@ const ShowAllCompanies = (props) => {
   const dispatch = useDispatch();
 
   const companiesInStore = useSelector(state => state.companies)  //from Redux
-  // console.log("companies in ShowAllCompanies Comp:", companiesInStore)
+  console.log("companies in ShowAllCompanies Comp:", companiesInStore)
   // const [companiesInStore, setCompaniesInStore] = useState([])
 
   const addToken = (index) => {
