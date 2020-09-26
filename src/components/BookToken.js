@@ -1,55 +1,57 @@
 import React, { useEffect, useState } from 'react'
+import { firebase } from "./../components/LoginComponent"
 import { useSelector, useDispatch } from "react-redux"
-// import { firebase } from "./../components/LoginComponent"
 
 
 
-const BookToken = (props) => {
-    // const { index } = props // destructuring
+const BookToken = () => {
 
-    // const dispatch = useDispatch();
-    console.log("props in BookToken:", props)
-    
-    let receivedCompanies = props.companies;
+    // let receivedCompanies = props.companies;
+    const [index,setIndex] = useState()
+    const dispatch = useDispatch()
+    // const [tokensLeft,setTokensLeft] = useState();
 
-    // let reveivedCompanies = props.getCompFromShow()
+   /////////// GETTING COMPANIES FROM FIREBASE ///////////////
 
-//     const [companies,setCompanies] = useState([])
-//     let newList = useSelector(state => state.companies)
-//     if(newList != ""){
-//     setCompanies([newList])
-// }
+   useEffect(()=> getDataFromFirebase(),[])  // to get 1st company
 
-    console.log("companies in Book Token:", receivedCompanies)
-
-    /////////// GETTING COMPANIES FROM FIREBASE ///////////////
-
-// function getDataFromFirebase() {
-//   const db = firebase.firestore()
-
-//   db.collection("companies")
-//     .get()
-//     .then(function (querySnapshot) {
-//       querySnapshot.forEach(function (doc) {
-
-//         // console.log(doc.id, " => ", doc.data());
-//         let obj = doc.data();
+  
+   function getDataFromFirebase() {
+     const db = firebase.firestore()
+ 
+     db.collection("companies")
+       .get()
+       .then(function (querySnapshot) {
+         querySnapshot.forEach(function (doc) {
+ 
+           // console.log(doc.id, " => ", doc.data());
+           let obj = doc.data();
+          
+           dispatch({
+             type: "SET_COMPANIES_IN_STORE",
+             payload: obj,
+           })
+         });
+       })
        
-//         dispatch({
-//           type: "SHOW_COMPANY",
-//           payload: obj,
-//         })
-//       });
-//     })
+       .catch(function (error) {
+         console.log("Error getting documents: ", error);
+       });
+     }
+     
+    let receivedCompanies = useSelector(state => state.companies)
+    // console.log("state in Booktoken from Redux:", receivedCompanies)
 
-//     .catch(function (error) {
-//       console.log("Error getting documents: ", error);
-//     });
-// }
-///////////////////////////////////////////////////////////////////////
 
-    const tokenBooked = () => {
-        console.log("1 token will be booked")
+    const tokenBooked = (index) => {
+        setIndex(index)
+        let compName = receivedCompanies[index].name.name;
+        // console.log("1 token will be booked from Company: ", compName )
+        alert(`1 token will be booked from Company: ${compName}`)
+        
+        --receivedCompanies[index].tokensCount.tokensCount
+        // setTokensLeft(--tokens)
+        console.log("new token count:", receivedCompanies[index].tokensCount.tokensCount)
     }
     
 
@@ -86,8 +88,8 @@ const BookToken = (props) => {
                                 <td> {item.timingsFrom.timingsFrom} </td>
                                 <td> {item.timingsTo.timingsTo} </td>
                                 <td> {item.address.address} </td>
-                                <td> {20} </td>
-                                <td> <button style={{color:"white",backgroundColor:"green"}} onClick={() => tokenBooked()}>Yes!</button> </td>
+                                <td> {item.tokensCount.tokensCount} </td>
+                                <td> <button style={{color:"white",backgroundColor:"green"}} onClick={() => tokenBooked(index)}>Yes!</button> </td>
                             </tr>
                         )
                     })}

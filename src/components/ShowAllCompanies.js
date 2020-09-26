@@ -9,7 +9,7 @@ const ShowAllCompanies = (props) => {
   const dispatch = useDispatch();
 
   const companiesInStore = useSelector(state => state.companies)  //from Redux
-  // console.log("companies in Show All companies Comp:", companiesInStore)
+  // console.log("companies in ShowAllCompanies Comp:", companiesInStore)
   // const [companiesInStore, setCompaniesInStore] = useState([])
 
   const addToken = (index) => {
@@ -25,6 +25,7 @@ const ShowAllCompanies = (props) => {
 
   useEffect(()=> getDataFromFirebase(),[])  // to get 1st company
 
+  
   function getDataFromFirebase() {
     const db = firebase.firestore()
 
@@ -49,14 +50,13 @@ const ShowAllCompanies = (props) => {
     }
     
     
-    function sendCompaniesToHome(companiesInStore){
-      props.getCompFromShow(companiesInStore)
+    // function sendCompaniesToHome(companiesInStore){
+    //   props.getCompFromShow(companiesInStore)
       
-    }
+    // }
     
     //////////////////////////////////////////////////////
     if(companiesInStore){
-      sendCompaniesToHome(companiesInStore)
   return (
     <div>
       <table border='1' style={{

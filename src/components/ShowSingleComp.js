@@ -6,7 +6,7 @@ import { firebase } from "./../components/LoginComponent"
 const ShowSingleComp = (props) => {
     let { index } = props  //destructuring
     // const [company,setCompany] = useState([])
-    console.log("index:", index)
+    // console.log("index:", index)
     const company = useSelector(state => state.companies[index])
     // console.log("company: ", company)
 
@@ -32,14 +32,14 @@ const ShowSingleComp = (props) => {
     const [tokensCount, setTokensCount] = useState(0)
     const [estimatedTime, setEstimatedTime] = useState(0)
 
-    console.log("name: ", name)
-    console.log("date: ", date)
-    console.log("certificates: ", certificates)
-    console.log("timingsFrom: ", timingsFrom)
-    console.log("timingsTo: ", timingsTo)
-    console.log("address: ", address)
-    console.log("tokensCount: ", tokensCount)
-    console.log("estimatedTime: ", estimatedTime)
+    // console.log("name: ", name)
+    // console.log("date: ", date)
+    // console.log("certificates: ", certificates)
+    // console.log("timingsFrom: ", timingsFrom)
+    // console.log("timingsTo: ", timingsTo)
+    // console.log("address: ", address)
+    // console.log("tokensCount: ", tokensCount)
+    // console.log("estimatedTime: ", estimatedTime)
 
     // const dispatch = useDispatch();
 

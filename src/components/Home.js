@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import * as firebase from "firebase"
 import Form from "./../components/Form"
@@ -18,15 +18,10 @@ const Home = () => {
 
   const [companies,setCompanies] = useState()
 
-  function getCompFromShow(companies){
-    setCompanies(companies)
-  }
 
-console.log("companies in Home", companies)
-
-  // var companiesInStore = useSelector(state => state.companies)
+  var companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
-  // console.log("companiesInStore: ", companiesInStore)
+  // console.log("companiesInStore in HOME: ", companiesInStore)
 
 
   const ShowForm = () => {
@@ -75,7 +70,7 @@ console.log("companies in Home", companies)
       <br></br><br></br>
 
       {/* TO RENDER ALL COMPANIES  */}
-      {showAllCompanies && <ShowAllCompanies getCompFromShow={getCompFromShow} addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies} />}
+      {showAllCompanies && <ShowAllCompanies addingNewComp={addingNewComp} setShowForm={setShowForm} setShowSingleCompany={setShowSingleCompany} setIndex={setIndex} setShowAllCompanies={setShowAllCompanies} />}
 
 
       {/* TO ADD NEW COMPANY  */}
@@ -88,7 +83,7 @@ console.log("companies in Home", companies)
 
 
       {/* TO BOOK TOKEN OF ANY COMPANY  */}
-      {showBookToken && <BookToken index={index} companies={companies} />}
+      {showBookToken && <BookToken index={index}   />}
 
 
 
