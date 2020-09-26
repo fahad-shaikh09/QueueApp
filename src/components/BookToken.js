@@ -8,9 +8,9 @@ const BookToken = () => {
 
     // let receivedCompanies = props.companies;
     const dispatch = useDispatch()
-    
+
     let receivedCompanies = useSelector(state => state.companies)
-    
+
     const [index, setIndex] = useState()
     // const [date, setDate] = useState(receivedCompanies[index].date.date)
     // const [certificates, setCertificates] = useState(receivedCompanies[index].certificates.certificates)
@@ -59,7 +59,7 @@ const BookToken = () => {
 
         --receivedCompanies[index].tokensCount.tokensCount
         // console.log("new token count:", receivedCompanies[index].tokensCount.tokensCount)
-        
+
         let date = receivedCompanies[index].date.date
         let certificates = receivedCompanies[index].certificates.certificates
         let timingsFrom = receivedCompanies[index].timingsFrom.timingsFrom
@@ -67,7 +67,7 @@ const BookToken = () => {
         let address = receivedCompanies[index].address.address
         let tokensCount = receivedCompanies[index].tokensCount.tokensCount
         let estimatedTime = receivedCompanies[index].estimatedTime.estimatedTime
-        
+
         setTokensCount(tokensCount)
         console.log("new token count:", tokensCount)
 
@@ -96,6 +96,8 @@ const BookToken = () => {
 
     return (
         <div>
+            <hr></hr>
+            <h2>Tokens details!</h2>
             <table border='1' style={{
                 textAlign: 'left',
                 width: "50vw",
