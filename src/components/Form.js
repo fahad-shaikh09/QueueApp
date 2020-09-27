@@ -68,6 +68,7 @@ const Form = (props) => {
             alignItems: "center",
             margin: "0 auto",
         }}>
+            <hr/>
             <form onSubmit={(event) => formSubmit(event)}>
                 Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} />
                 <br></br>  <br></br>

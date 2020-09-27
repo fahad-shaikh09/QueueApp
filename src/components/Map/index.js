@@ -12,6 +12,9 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
     setLatitude(event.latLng.lat)
     setLongitude(event.latLng.lng)
 
+    // console.log("new Latitude", latitude)
+    // console.log("new Longitude", longitude)
+
 
     fetch(`https://api.foursquare.com/v2/venues/explore?client_id=UVNMGGR0VNLCW3QUQISSG0TQGEOW4RREFVXZMIDT0VUHSHCR&client_secret=4JS1TJ0RLIO111SIXKTWN1MDM4G4V41GYOYGZCB4YGXF12RA
 &v=20180323&ll=${latitude},${longitude}`)
