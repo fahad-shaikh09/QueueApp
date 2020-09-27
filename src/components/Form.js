@@ -1,8 +1,22 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { firebase } from "./../components/LoginComponent"
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '25ch',
+        },
+    },
+}));
+
 
 const Form = (props) => {
+    const classes = useStyles();
+
     const [name, setName] = useState()
     const [date, setDate] = useState()
     const [certificates, setCertificates] = useState()
@@ -10,8 +24,14 @@ const Form = (props) => {
     const [timingsTo, setTimingsTo] = useState()
     const [address, setAddress] = useState()
     let tokensCount = 0;
-    let estimatedTime =  0;
+    let estimatedTime = 0;
 
+    console.log("name:", name)
+    console.log("date:", date)
+    console.log("certificates:", certificates)
+    console.log("timingsFrom:", timingsFrom)
+    console.log("timingsTo:", timingsTo)
+    console.log("address:", address)
 
     const dispatch = useDispatch();
     const db = firebase.firestore()
@@ -25,8 +45,8 @@ const Form = (props) => {
             timingsFrom: { timingsFrom },
             timingsTo: { timingsTo },
             address: { address },
-            tokensCount: {tokensCount},
-            estimatedTime: {estimatedTime}
+            tokensCount: { tokensCount },
+            estimatedTime: { estimatedTime }
         })
             .then(function () {
                 console.log("Document successfully written!");
@@ -34,7 +54,7 @@ const Form = (props) => {
             .catch(function (error) {
                 console.error("Error writing document: ", error);
             });
-        props.addingNewComp(true)    
+        props.addingNewComp(true)
     }
 
 
@@ -62,36 +82,113 @@ const Form = (props) => {
 
 
     return (
-        <div style={{
-            textAlign: 'left',
-            width: "50vw",
-            alignItems: "center",
-            margin: "0 auto",
-        }}>
-            <hr/>
+        <div
+        // style={{
+        //     textAlign: 'left',
+        //     width: "50vw",
+        //     alignItems: "center",
+        //     margin: "0 auto",
+        // }}
+        >
+            <hr />
+            <h2>Enter details of new company to be added:</h2>
             <form onSubmit={(event) => formSubmit(event)}>
-                Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} />
-                <br></br>  <br></br>
 
-            Date since company is established <input required type="date" onChange={e => setDate(e.target.value)} />
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="Required"
+                    defaultValue="Enter Name of Company"
+                    variant="outlined"
+                    type="text" onChange={e => setName(e.target.value)}
+                />
+                {/* Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} /> */}
                 <br></br>  <br></br>
+                <br></br> 
 
-            Certificates <input required type="text" onChange={e => setCertificates(e.target.value)} />
-                <br></br>  <br></br>
 
-            Timings (From) <input required type="date" onChange={e => setTimingsFrom(e.target.value)} />
+                <TextField
+                    id="date"
+                    label="Date Since Company is established"
+                    type="date"
+                    // defaultValue="2020-09-27"
+                    className={classes.textField}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={e => setDate(e.target.value)}
+                />
+                {/* Date since company is established <input required type="date" onChange={e => setDate(e.target.value)} /> */}
                 <br></br>  <br></br>
+                <br></br>  
 
-            Timings (To) <input required type="date" onChange={e => setTimingsTo(e.target.value)} />
-                <br></br>  <br></br>
 
-            Address <input required type="text" onChange={e => setAddress(e.target.value)} />
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="Required"
+                    defaultValue="Certificates"
+                    variant="outlined"
+                    type="text" onChange={e => setCertificates(e.target.value)}
+                />
+                {/* Certificates <input required type="text" onChange={e => setCertificates(e.target.value)} /> */}
                 <br></br>  <br></br>
+                <br></br>  
+                
+                
+                <TextField
+                    id="datetime-local"
+                    label="Timings From"
+                    type="datetime-local"
+                    // defaultValue="2020-09-27"
+                    className={classes.textField}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={e => setTimingsFrom(e.target.value)}
+                />
+                {/* Timings (From) <input required type="date" onChange={e => setTimingsFrom(e.target.value)} /> */}
+                <br></br>  <br></br>
+                <br></br>  
+
+
+                <TextField
+                    id="datetime-local"
+                    label="Timings To"
+                    type="datetime-local"
+                    // defaultValue="2020-09-27"
+                    className={classes.textField}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    onChange={e => setTimingsTo(e.target.value)}
+                />
+                {/* Timings (To) <input required type="date" onChange={e => setTimingsTo(e.target.value)} /> */}
+                <br></br>  <br></br>
+                <br></br>  
+
+
+                <TextField
+                    required
+                    id="outlined-required"
+                    label="Required"
+                    defaultValue="Address"
+                    variant="outlined"
+                    type="text" 
+                    onChange={e => setAddress(e.target.value)}
+                />
+                {/* Address <input required type="text" onChange={e => setAddress(e.target.value)} /> */}
+                <br></br>  <br></br>
+                <br></br> 
 
                 <input type="submit" value="Submit" />
                 <br></br>  <br></br>
 
             </form>
+
+            {/* //////////////////////////////////////////////////////////////////////////////////// */}
+           
+
         </div>
     )
 }
