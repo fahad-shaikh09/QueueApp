@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { firebase } from "./../components/LoginComponent"
 import { useSelector, useDispatch } from "react-redux"
 
@@ -11,18 +11,18 @@ const BookToken = () => {
 
     let receivedCompanies = useSelector(state => state.companies)
 
-    const [index, setIndex] = useState()
+    // const [index, setIndex] = useState()
     // const [date, setDate] = useState(receivedCompanies[index].date.date)
     // const [certificates, setCertificates] = useState(receivedCompanies[index].certificates.certificates)
     // const [timingsFrom, setTimingsFrom] = useState(receivedCompanies[index].timingsFrom.timingsFrom)
     // const [timingsTo, setTimingsTo] = useState(receivedCompanies[index].timingsTo.timingsTo)
     // const [address, setAddress] = useState(receivedCompanies[index].address.address)
-    const [tokensCount, setTokensCount] = useState()
+    // const [tokensCount, setTokensCount] = useState()
     // const [estimatedTime, setEstimatedTime] = useState(receivedCompanies[index].estimatedTime.estimatedTime)
 
     /////////// GETTING COMPANIES FROM FIREBASE ///////////////
 
-    useEffect(() => getDataFromFirebase(), [])  // to get 1st company
+    useEffect(() => getDataFromFirebase(),[])  // to get 1st company
 
     const db = firebase.firestore()
 
@@ -52,7 +52,7 @@ const BookToken = () => {
 
 
     const tokenBooked = (index) => {
-        setIndex(index)
+        // setIndex(index)
         let name = receivedCompanies[index].name.name;
         // console.log("1 token will be booked from Company: ", name )
         alert(`1 token will be booked from Company: ${name}`)
@@ -68,8 +68,8 @@ const BookToken = () => {
         let tokensCount = receivedCompanies[index].tokensCount.tokensCount
         let estimatedTime = receivedCompanies[index].estimatedTime.estimatedTime
 
-        setTokensCount(tokensCount)
-        console.log("new token count:", tokensCount)
+        // setTokensCount(tokensCount)
+        // console.log("new token count:", tokensCount)
 
         //Posting uppdated token count to Firebase
         db.collection("companies").doc(name).set({

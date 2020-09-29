@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux'
 import { firebase } from "./../components/LoginComponent"
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+// import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
             margin: theme.spacing(1),
             width: '25ch',
         },
+    },
+    button: {
+        margin: theme.spacing(1),
     },
 }));
 
@@ -104,10 +110,11 @@ const Form = (props) => {
                 />
                 {/* Enter Name of Company <input type="text" onChange={e => setName(e.target.value)} /> */}
                 <br></br>  <br></br>
-                <br></br> 
+                <br></br>
 
 
                 <TextField
+                    required
                     id="date"
                     label="Date Since Company is established"
                     type="date"
@@ -120,7 +127,7 @@ const Form = (props) => {
                 />
                 {/* Date since company is established <input required type="date" onChange={e => setDate(e.target.value)} /> */}
                 <br></br>  <br></br>
-                <br></br>  
+                <br></br>
 
 
                 <TextField
@@ -133,10 +140,11 @@ const Form = (props) => {
                 />
                 {/* Certificates <input required type="text" onChange={e => setCertificates(e.target.value)} /> */}
                 <br></br>  <br></br>
-                <br></br>  
-                
-                
+                <br></br>
+
+
                 <TextField
+                    required
                     id="datetime-local"
                     label="Timings From"
                     type="datetime-local"
@@ -149,10 +157,11 @@ const Form = (props) => {
                 />
                 {/* Timings (From) <input required type="date" onChange={e => setTimingsFrom(e.target.value)} /> */}
                 <br></br>  <br></br>
-                <br></br>  
+                <br></br>
 
 
                 <TextField
+                    required
                     id="datetime-local"
                     label="Timings To"
                     type="datetime-local"
@@ -165,7 +174,7 @@ const Form = (props) => {
                 />
                 {/* Timings (To) <input required type="date" onChange={e => setTimingsTo(e.target.value)} /> */}
                 <br></br>  <br></br>
-                <br></br>  
+                <br></br>
 
 
                 <TextField
@@ -174,20 +183,29 @@ const Form = (props) => {
                     label="Required"
                     defaultValue="Address"
                     variant="outlined"
-                    type="text" 
+                    type="text"
                     onChange={e => setAddress(e.target.value)}
                 />
                 {/* Address <input required type="text" onChange={e => setAddress(e.target.value)} /> */}
                 <br></br>  <br></br>
-                <br></br> 
+                <br></br>
 
-                <input type="submit" value="Submit" />
+
+                <Fab type="submit" color="primary" aria-label="add">
+                    <AddIcon />
+                </Fab>
+
+                {/* <Button type="submit" variant="contained" color="primary">
+                    Submit
+                </Button> */}
+
+                {/* <input type="submit" value="Submit" /> */}
                 <br></br>  <br></br>
 
             </form>
 
             {/* //////////////////////////////////////////////////////////////////////////////////// */}
-           
+
 
         </div>
     )

@@ -7,10 +7,18 @@ import ShowSingleComp from "./ShowSingleComp"
 import BookToken from "./BookToken"
 import ShowAllCompanies from "./ShowAllCompanies"
 import SearchCompany from "./SearchCompany"
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
-
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing(1),
+  },
+}));
 
 const Home = () => {
+
+  const classes = useStyles();
 
   const currentUser = useSelector(state => state.user)
   const [showform, setShowForm] = useState(false)
@@ -22,7 +30,7 @@ const Home = () => {
 
   
 
-  var companiesInStore = useSelector(state => state.companies)
+  // var companiesInStore = useSelector(state => state.companies)
   const [index, setIndex] = useState()
   // console.log("companiesInStore in HOME: ", companiesInStore)
 
@@ -68,10 +76,10 @@ return (
     <br></br>
     {/* ///////////////////////////////////////////////////////////////////////////////////// */}
 
-    <button onClick={() => ShowForm()}>Do you want to Add a Company?</button> <br></br>
+    <Button className={classes.button} variant="contained" color="primary" onClick={() => ShowForm()}>Do you want to Add a Company?</Button> <br></br>
     <br></br>
 
-    <button onClick={() => bookToken()}>Are you a Person, waiting for Token?</button>
+    <Button className={classes.button} variant="contained" onClick={() => bookToken()}>Are you a Person, waiting for Token?</Button>
     <br></br><br></br>
     <p>---------------------------------------------------------------------------</p>
 
