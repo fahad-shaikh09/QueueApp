@@ -1,12 +1,35 @@
 import React, { useState } from "react"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 // import { useSelector } from "react-redux"
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 
 const MyMapComponent = withScriptjs(withGoogleMap((props) => {
+  const classes = useStyles();
 
   const [latitude, setLatitude] = useState(24.902752)
   const [longitude, setLongitude] = useState(67.1124084)
   const [places, setPlaces] = useState([])
+  const [selected,setSelected] = useState("")
+  console.log("selected place: ", selected)
+
+
+props.getAddress(selected)
 
   const setCoordinates = (event) => {
     setLatitude(event.latLng.lat)
@@ -27,23 +50,49 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
 
   return (
     <div>
+      <div>
+        <h1>Drag marker to load locations in menu</h1>
+        <FormControl className={classes.formControl}>
+          <InputLabel shrink id="demo-simple-select-placeholder-label-label">
+            Select Location from below menu!
+        </InputLabel>
+          <Select
+            labelId="demo-simple-select-placeholder-label-label"
+            id="demo-simple-select-placeholder-label"
+            displayEmpty
+            className={classes.selectEmpty}
+          >
+            <MenuItem value=""> <em>None</em> </MenuItem>
+            {/* <MenuItem value={10}>Ten</MenuItem> */}
+            {places.map((place, index) => {
+              return <option key={index} value={place} onClick={()=>{setSelected(place.venue.name)}}>
+                {place.venue.name}
+                </option>
+            })}
+          </Select>
+          <FormHelperText>Drag marker to select area</FormHelperText>
+        </FormControl>
+      </div>
+
+      {/* ///////////////////////////////////////////////////////////////////////////////// */}
       <br></br>
       <br></br>
-      <h1>Drag marker to select Places</h1>
+      {/* <h1>Drag marker to select Places</h1>
       <select>
         {places.map((place, index) => {
           return <option key={index} value={place}>{place.venue.name}</option>
         })}
-      </select>
+      </select> */}
       <br></br>
       <br></br>
-      <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{ lat: 24.902752, lng: 67.1124084 }}
-      >
-        {props.isMarkerShown && <Marker draggable={true} onDragEnd={(event) => setCoordinates(event)} position={{ lat: latitude, lng: longitude }} />}
-      </GoogleMap>
-
+      <div>
+        <GoogleMap
+          defaultZoom={8}
+          defaultCenter={{ lat: 24.902752, lng: 67.1124084 }}
+        >
+          {props.isMarkerShown && <Marker draggable={true} onDragEnd={(event) => setCoordinates(event)} position={{ lat: latitude, lng: longitude }} />}
+        </GoogleMap>
+      </div>
     </div>
   )
 }))

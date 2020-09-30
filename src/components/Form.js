@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { firebase } from "./../components/LoginComponent"
+import MyMapComponent from "./../components/Map/index"
+
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 // import Button from '@material-ui/core/Button';
@@ -38,6 +40,10 @@ const Form = (props) => {
     console.log("timingsFrom:", timingsFrom)
     console.log("timingsTo:", timingsTo)
     console.log("address:", address)
+
+    function getAddress(value) {
+        setAddress(value)
+    }
 
     const dispatch = useDispatch();
     const db = firebase.firestore()
@@ -177,7 +183,7 @@ const Form = (props) => {
                 <br></br>
 
 
-                <TextField
+                {/* <TextField
                     required
                     id="outlined-required"
                     label="Required"
@@ -185,12 +191,24 @@ const Form = (props) => {
                     variant="outlined"
                     type="text"
                     onChange={e => setAddress(e.target.value)}
-                />
+                /> */}
                 {/* Address <input required type="text" onChange={e => setAddress(e.target.value)} /> */}
                 <br></br>  <br></br>
                 <br></br>
 
 
+                <MyMapComponent
+                    isMarkerShown
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                    loadingElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div style={{ height: `400px` }} />}
+                    mapElement={<div style={{ height: `100%` }} />}
+                    // onChange={e => setAddress(e.target.value)}
+                    getAddress={getAddress}
+                />
+                
+                <br></br>  <br></br>
+                <br></br>
                 <Fab type="submit" color="primary" aria-label="add">
                     <AddIcon />
                 </Fab>

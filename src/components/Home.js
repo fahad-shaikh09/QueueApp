@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import * as firebase from "firebase"
 import Form from "./../components/Form"
-import MyMapComponent from "./../components/Map/index"
 import ShowSingleComp from "./ShowSingleComp"
 import BookToken from "./BookToken"
 import ShowAllCompanies from "./ShowAllCompanies"
@@ -76,18 +75,22 @@ return (
     <br></br>
     {/* ///////////////////////////////////////////////////////////////////////////////////// */}
 
-    <Button className={classes.button} variant="contained" color="primary" onClick={() => ShowForm()}>Do you want to Add a Company?</Button> <br></br>
+    <Button className={classes.button} variant="contained" color="primary" onClick={() => ShowForm()}>
+      Do you want to Add a Company?</Button> <br></br>
     <br></br>
 
-    <Button className={classes.button} variant="contained" onClick={() => bookToken()}>Are you a Person, waiting for Token?</Button>
+    <Button className={classes.button} variant="contained" onClick={() => bookToken()}>
+      Are you a Person, waiting for Token?</Button>
     <br></br><br></br>
     <p>---------------------------------------------------------------------------</p>
 
 
-    <button onClick={() => displayCompanies()}>Do you want to see List of Companies?</button>
+    <Button variant="contained" color="secondary" onClick={() => displayCompanies()}>
+      Do you want to see List of Companies?</Button>
     <br></br><br></br>
 
-    <button onClick={() => showSearchCompany()}>Do you want to search any company?</button>
+    <Button variant="contained" color="green" onClick={() => showSearchCompany()}>
+      Do you want to search any company?</Button>
     <br></br><br></br>
 
     {/* TO RENDER ALL COMPANIES  */}
@@ -111,13 +114,7 @@ return (
     {searchCompany && <SearchCompany />}
 
     <br></br>      <br></br>      <br></br>      <br></br>      <br></br>
-    <MyMapComponent
-      isMarkerShown
-      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-      loadingElement={<div style={{ height: `100%` }} />}
-      containerElement={<div style={{ height: `400px` }} />}
-      mapElement={<div style={{ height: `100%` }} />}
-    />
+   
 
   </div>
 )
