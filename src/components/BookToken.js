@@ -1,28 +1,53 @@
 import React, { useEffect } from 'react'
 import { firebase } from "./../components/LoginComponent"
 import { useSelector, useDispatch } from "react-redux"
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    body: {
+        fontSize: 14,
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.action.hover,
+        },
+    },
+}))(TableRow);
 
 
+const useStyles = makeStyles({
+    table: {
+        minWidth: 700,
+    },
+});
 
+
+////////////////// MAIN FUNCTION ///////////////////////////////////////////////////
 const BookToken = () => {
-
+    const classes = useStyles();
     // let receivedCompanies = props.companies;
     const dispatch = useDispatch()
 
     let receivedCompanies = useSelector(state => state.companies)
 
-    // const [index, setIndex] = useState()
-    // const [date, setDate] = useState(receivedCompanies[index].date.date)
-    // const [certificates, setCertificates] = useState(receivedCompanies[index].certificates.certificates)
-    // const [timingsFrom, setTimingsFrom] = useState(receivedCompanies[index].timingsFrom.timingsFrom)
-    // const [timingsTo, setTimingsTo] = useState(receivedCompanies[index].timingsTo.timingsTo)
-    // const [address, setAddress] = useState(receivedCompanies[index].address.address)
-    // const [tokensCount, setTokensCount] = useState()
-    // const [estimatedTime, setEstimatedTime] = useState(receivedCompanies[index].estimatedTime.estimatedTime)
 
     /////////// GETTING COMPANIES FROM FIREBASE ///////////////
-
-    useEffect(() => getDataFromFirebase(),[])  // to get 1st company
+    // eslint-disable-next-line
+    useEffect(() => getDataFromFirebase(), [])  // to get 1st company
 
     const db = firebase.firestore()
 
@@ -91,52 +116,46 @@ const BookToken = () => {
         // props.addingNewComp(true)
 
     }
-
-
-
     return (
         <div>
             <hr></hr>
             <h2>Tokens details!</h2>
-            <table border='1' style={{
-                textAlign: 'left',
-                width: "50vw",
-                alignItems: "center",
-                margin: "0 auto",
-            }}>
-                <thead>
-                    <tr>
-                        <th>Company's Name</th>
-                        <th>Date</th>
-                        <th>Certificates</th>
-                        <th>Timings (From)</th>
-                        <th>Timings (To)</th>
-                        <th>Address</th>
-                        <th>Tokens left</th>
-                        <th>Book a Token?</th>
 
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {receivedCompanies.map((item, index) => {
-                        return (
-                            <tr key={index}>
-                                <td>{item.name.name} </td>
-                                <td> {item.date.date}</td>
-                                <td> {item.certificates.certificates} </td>
-                                <td> {item.timingsFrom.timingsFrom} </td>
-                                <td> {item.timingsTo.timingsTo} </td>
-                                <td> {item.address.address} </td>
-                                <td> {item.tokensCount.tokensCount} </td>
-                                <td> <button style={{ color: "white", backgroundColor: "green" }}
-                                    onClick={() => tokenBooked(index)}>Yes!</button> </td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+            <div>
+                <TableContainer component={Paper}>
+                    <Table className={classes.table} aria-label="customized table">
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell>Company's Name</StyledTableCell>
+                                <StyledTableCell align="right">Date</StyledTableCell>
+                                <StyledTableCell align="right">Certificates</StyledTableCell>
+                                <StyledTableCell align="right">Timings (From)</StyledTableCell>
+                                <StyledTableCell align="right">Timings (To)</StyledTableCell>
+                                <StyledTableCell align="right">Address</StyledTableCell>
+                                <StyledTableCell align="right"> Tokens left</StyledTableCell>
+                                <StyledTableCell align="right"> Book a Token?</StyledTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {receivedCompanies.map((item, index) => (
+                                <StyledTableRow key={item.name}>
+                                    <StyledTableCell align="right">{item.name.name}</StyledTableCell>
+                                    <StyledTableCell align="right">{item.date.date}</StyledTableCell>
+                                    <StyledTableCell align="right">{item.certificates.certificates}</StyledTableCell>
+                                    <StyledTableCell align="right"> {item.timingsFrom.timingsFrom} </StyledTableCell>
+                                    <StyledTableCell align="right"> {item.timingsTo.timingsTo} </StyledTableCell>
+                                    <StyledTableCell align="right"> {item.address.address} </StyledTableCell>
+                                    <StyledTableCell component="th" scope="row"> {item.tokensCount.tokensCount} </StyledTableCell>
+                                    <StyledTableCell> <button style={{ color: "white", backgroundColor: "green" }}
+                                        onClick={() => tokenBooked(index)}>Yes!</button> </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
         </div>
+
     )
 }
 

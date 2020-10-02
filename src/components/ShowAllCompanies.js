@@ -223,7 +223,8 @@ export default function ShowAllCompanies(props) {
   }
 
   /////////// GETTING COMPANIES FROM FIREBASE ///////////////
-  useEffect(() => getDataFromFirebase(), [])  // to get 1st company
+  // eslint-disable-next-line
+  useEffect(() => getDataFromFirebase(),[])  // to get 1st company
 
   function getDataFromFirebase() {
     const db = firebase.firestore()

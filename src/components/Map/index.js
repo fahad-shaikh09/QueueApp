@@ -26,7 +26,7 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) => {
   const [longitude, setLongitude] = useState(67.1124084)
   const [places, setPlaces] = useState([])
   const [selected,setSelected] = useState("")
-  console.log("selected place: ", selected)
+  // console.log("selected place: ", selected)
 
 
 props.getAddress(selected)
@@ -51,7 +51,7 @@ props.getAddress(selected)
   return (
     <div>
       <div>
-        <h1>Drag marker to load locations in menu</h1>
+        <h1>Drag marker in map to load Locations in menu</h1>
         <FormControl className={classes.formControl}>
           <InputLabel shrink id="demo-simple-select-placeholder-label-label">
             Select Location from below menu!

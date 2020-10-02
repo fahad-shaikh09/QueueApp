@@ -94,14 +94,7 @@ const Form = (props) => {
 
 
     return (
-        <div
-        // style={{
-        //     textAlign: 'left',
-        //     width: "50vw",
-        //     alignItems: "center",
-        //     margin: "0 auto",
-        // }}
-        >
+        <div>
             <hr />
             <h2>Enter details of new company to be added:</h2>
             <form onSubmit={(event) => formSubmit(event)}>
@@ -183,20 +176,6 @@ const Form = (props) => {
                 <br></br>
 
 
-                {/* <TextField
-                    required
-                    id="outlined-required"
-                    label="Required"
-                    defaultValue="Address"
-                    variant="outlined"
-                    type="text"
-                    onChange={e => setAddress(e.target.value)}
-                /> */}
-                {/* Address <input required type="text" onChange={e => setAddress(e.target.value)} /> */}
-                <br></br>  <br></br>
-                <br></br>
-
-
                 <MyMapComponent
                     isMarkerShown
                     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
@@ -209,21 +188,13 @@ const Form = (props) => {
                 
                 <br></br>  <br></br>
                 <br></br>
-                <Fab type="submit" color="primary" aria-label="add">
+                
+                <Fab type="submit" color="primary" aria-label="add" 
+                style={{marginTop: "130px"}}>
                     <AddIcon />
                 </Fab>
 
-                {/* <Button type="submit" variant="contained" color="primary">
-                    Submit
-                </Button> */}
-
-                {/* <input type="submit" value="Submit" /> */}
-                <br></br>  <br></br>
-
             </form>
-
-            {/* //////////////////////////////////////////////////////////////////////////////////// */}
-
 
         </div>
     )
