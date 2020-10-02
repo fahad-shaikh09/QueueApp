@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { firebase } from "./../components/LoginComponent"
 import { useSelector, useDispatch } from "react-redux"
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -41,7 +41,8 @@ const BookToken = () => {
     const classes = useStyles();
     // let receivedCompanies = props.companies;
     const dispatch = useDispatch()
-
+    const [tokensCount, setTokensCount] = useState();
+    console.log("tokensCount", tokensCount)
     let receivedCompanies = useSelector(state => state.companies)
 
 
@@ -73,7 +74,7 @@ const BookToken = () => {
             });
     }
 
-    // console.log("state in Booktoken from Redux:", receivedCompanies)
+    console.log("state in Booktoken from Redux:", receivedCompanies)
 
 
     const tokenBooked = (index) => {
@@ -93,7 +94,7 @@ const BookToken = () => {
         let tokensCount = receivedCompanies[index].tokensCount.tokensCount
         let estimatedTime = receivedCompanies[index].estimatedTime.estimatedTime
 
-        // setTokensCount(tokensCount)
+        setTokensCount(tokensCount)
         // console.log("new token count:", tokensCount)
 
         //Posting uppdated token count to Firebase
@@ -126,27 +127,27 @@ const BookToken = () => {
                     <Table className={classes.table} aria-label="customized table">
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell>Company's Name</StyledTableCell>
-                                <StyledTableCell align="right">Date</StyledTableCell>
-                                <StyledTableCell align="right">Certificates</StyledTableCell>
-                                <StyledTableCell align="right">Timings (From)</StyledTableCell>
-                                <StyledTableCell align="right">Timings (To)</StyledTableCell>
-                                <StyledTableCell align="right">Address</StyledTableCell>
-                                <StyledTableCell align="right"> Tokens left</StyledTableCell>
-                                <StyledTableCell align="right"> Book a Token?</StyledTableCell>
+                                <StyledTableCell align="left">Company's Name</StyledTableCell>
+                                <StyledTableCell align="left">Date</StyledTableCell>
+                                <StyledTableCell align="left">Certificates</StyledTableCell>
+                                <StyledTableCell align="left">Timings (From)</StyledTableCell>
+                                <StyledTableCell align="left">Timings (To)</StyledTableCell>
+                                <StyledTableCell align="left">Address</StyledTableCell>
+                                <StyledTableCell align="left"> Tokens left</StyledTableCell>
+                                <StyledTableCell align="left"> Book a Token?</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {receivedCompanies.map((item, index) => (
-                                <StyledTableRow key={item.name}>
-                                    <StyledTableCell align="right">{item.name.name}</StyledTableCell>
-                                    <StyledTableCell align="right">{item.date.date}</StyledTableCell>
-                                    <StyledTableCell align="right">{item.certificates.certificates}</StyledTableCell>
-                                    <StyledTableCell align="right"> {item.timingsFrom.timingsFrom} </StyledTableCell>
-                                    <StyledTableCell align="right"> {item.timingsTo.timingsTo} </StyledTableCell>
-                                    <StyledTableCell align="right"> {item.address.address} </StyledTableCell>
-                                    <StyledTableCell component="th" scope="row"> {item.tokensCount.tokensCount} </StyledTableCell>
-                                    <StyledTableCell> <button style={{ color: "white", backgroundColor: "green" }}
+                                <StyledTableRow key={index}>
+                                    <StyledTableCell align="left">{item.name.name}</StyledTableCell>
+                                    <StyledTableCell align="left">{item.date.date}</StyledTableCell>
+                                    <StyledTableCell align="left">{item.certificates.certificates}</StyledTableCell>
+                                    <StyledTableCell align="left"> {item.timingsFrom.timingsFrom} </StyledTableCell>
+                                    <StyledTableCell align="left"> {item.timingsTo.timingsTo} </StyledTableCell>
+                                    <StyledTableCell align="left"> {item.address.address} </StyledTableCell>
+                                    <StyledTableCell align="left"> {item.tokensCount.tokensCount} </StyledTableCell>
+                                    <StyledTableCell align="left"> <button style={{ color: "white", backgroundColor: "green" }}
                                         onClick={() => tokenBooked(index)}>Yes!</button> </StyledTableCell>
                                 </StyledTableRow>
                             ))}

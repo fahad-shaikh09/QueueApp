@@ -89,7 +89,7 @@ return (
       Do you want to see List of Companies?</Button>
     <br></br><br></br>
 
-    <Button variant="contained" color="green" onClick={() => showSearchCompany()}>
+    <Button variant="contained" onClick={() => showSearchCompany()}>
       Do you want to search any company?</Button>
     <br></br><br></br>
 
